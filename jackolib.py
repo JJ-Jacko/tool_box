@@ -13,9 +13,25 @@ def lsdir_af(path, file_extension):
     appointed_extension_files = []
     files = listdir(path)
 
-    for file in files:
-        if splitext(file)[1][1:] == file_extension:
-            appointed_extension_files.append(file)
+    # tar.gz 文件
+    if file_extension == 'tar.gz':
+        if splitext(file)[1][1:] == 'gz':
+            if splitext(splitext(file)[0])[1][1:] == 'tar':
+                appointed_extension_files.append(file)
+   
+    # gz 文件
+    elif file_extension == 'gz':
+        if splitext(file)[1][1:] == 'gz':
+            if splitext(splitext(file)[0])[1][1:] == 'tar':
+                pass
+            else:
+                appointed_extension_files.append(file)
+
+    # 一般文件
+    else:
+        for file in files:
+            if splitext(file)[1][1:] == file_extension:
+                appointed_extension_files.append(file)
     
     return appointed_extension_files
 
