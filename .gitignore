@@ -1,7 +1,10 @@
+# Python
 __pycache__
-.vscode
-src
-src2
-dst
+dist
+.venv
 
-test.py
+# VSCode
+# .vscode
+
+# Project
+logs

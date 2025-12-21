@@ -4,7 +4,7 @@
 重新编码
 """
 
-from jackolib import lsdir_af
+from video_tools.libs.jackolib import lsdir_af
 from os import system
 from os.path import join
 

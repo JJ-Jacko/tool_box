@@ -4,7 +4,7 @@
 并放入dst文件夹中
 """
 
-from jackolib import lsdir_af
+from video_tools.libs.jackolib import lsdir_af
 from shutil import copy
 from os.path import join
 

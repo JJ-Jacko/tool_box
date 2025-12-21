@@ -7,7 +7,7 @@
 from re import findall
 from os import system
 from os.path import join
-from jackolib import lsdir_af
+from video_tools.libs.jackolib import lsdir_af
 
 def sort_key(item):
     """

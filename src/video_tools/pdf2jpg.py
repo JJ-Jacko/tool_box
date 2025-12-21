@@ -4,7 +4,7 @@
 并放入 dst 文件夹中
 """
 
-from jackolib import lsdir_af
+from video_tools.libs.jackolib import lsdir_af
 from os import system
 from os.path import join
 from os.path import splitext
