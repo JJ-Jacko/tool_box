@@ -1,6 +1,6 @@
 """统计共有src目录下共有多少mp4文件"""
-
 from video_tools.libs.jackolib import lsdirr_af
+
 
 # 设置源文件夹
 SRC_DIR='src'

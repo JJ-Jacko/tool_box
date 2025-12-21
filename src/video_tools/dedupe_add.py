@@ -5,10 +5,12 @@
 并放入dst文件夹中
 并报告重复文件的次数和对应哈希值
 """
+import os.path as op
+import shutil
+from video_tools.libs.jackolib import lsdir_af
+from video_tools.libs.jackolib import lsdirr_af
+from video_tools.libs.jackolib import calc_file_hash
 
-from video_tools.libs.jackolib import lsdir_af, lsdirr_af, calc_file_hash
-from os.path import join
-from shutil import copy
 
 # 设置源文件夹和目标文件夹
 SRC_DIR='src'
@@ -32,13 +34,13 @@ class Duplicate_file:
 
 # 将src2的文件添加进哈希值表中
 for file in lsdir_af(SRC2_DIR, 'mp4'):
-    src_file = join(SRC2_DIR, file)
+    src_file = op.join(SRC2_DIR, file)
     hash = calc_file_hash(src_file)
     hashs.append(hash)
     
 # 检查
 for file in lsdirr_af(SRC_DIR, 'mp4'):
-    src_file = join(SRC_DIR, file)
+    src_file = op.join(SRC_DIR, file)
     hash = calc_file_hash(src_file)
     if hash in hashs:
         """
@@ -83,9 +85,9 @@ for file in lsdirr_af(SRC_DIR, 'mp4'):
 # 复制并命名排序
 i = 1
 for file in files:
-    src_file = join(SRC_DIR, file)
-    dst_file = join(DST_DIR, f'{i}.mp4')
-    copy(src_file, dst_file)
+    src_file = op.join(SRC_DIR, file)
+    dst_file = op.join(DST_DIR, f'{i}.mp4')
+    shutil.copy(src_file, dst_file)
     i += 1
 
 # 报告
@@ -94,3 +96,4 @@ for f in duplicate_files:
     print(f"hash: {f.hash}")
     print(f"重复次数: {f.times}")
     print("-----------------------------------")
+    

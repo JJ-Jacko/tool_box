@@ -3,10 +3,12 @@
 反色
 并放入 dst 文件夹中
 """
+import os.path as op
+
+from PIL import Image
 
 from video_tools.libs.jackolib import lsdir_af
-from os.path import join
-from PIL import Image
+
 
 # 设置源文件夹和目标文件夹
 SRC_DIR='src'
@@ -15,8 +17,8 @@ DST_DIR='dst'
 # 遍历源文件夹中的所有 jpg 文件
 for file in lsdir_af(SRC_DIR, 'jpg'):
     # 构建源文件和目标文件的完整路径
-    src_file = join(SRC_DIR, file)
-    dst_file = join(DST_DIR, file)
+    src_file = op.join(SRC_DIR, file)
+    dst_file = op.join(DST_DIR, file)
 
     # 打开图片文件
     image = Image.open(src_file)
@@ -29,3 +31,4 @@ for file in lsdir_af(SRC_DIR, 'jpg'):
 
     # 保存反色处理后的图片
     image.save(dst_file)
+    

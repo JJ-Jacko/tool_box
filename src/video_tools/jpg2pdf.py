@@ -3,18 +3,18 @@
 按顺序合并到一个 pdf 文件
 并放入 dst 文件夹中
 """
-
-from re import findall
-from os import system
-from os.path import join
+import re
+import os
+import os.path as op
 from video_tools.libs.jackolib import lsdir_af
+
 
 def sort_key(item):
     """
     为 sort 函数构造 sort_key
     规则：按照字符串后面的数字排序
     """
-    number = findall(r'\d+', item)
+    number = re.findall(r'\d+', item)
     if number:
         return int(number[0])
     else:
@@ -32,16 +32,16 @@ files = lsdir_af(SRC_DIR, 'jpg')
 files.sort(key=sort_key)
 for file in files:
     # 构建源文件的完整路径
-    src_file = join(SRC_DIR, file)
+    src_file = op.join(SRC_DIR, file)
     # 添加到 magick 命令中
     cmd += f'"{src_file}" '
 
 # 构建目标文件的完整路径
-dst_file = join(DST_DIR, 'output.pdf')
+dst_file = op.join(DST_DIR, 'output.pdf')
 
 # 构建完整 magick 命令
 cmd += f'"{dst_file}"'
 
 # 执行命令
-system(cmd)
+os.system(cmd)
 print(f" - - -  Done!!!  - - - ")

@@ -3,10 +3,11 @@
 按指定格式排序重命名
 并放入dst文件夹中
 """
+import shutil
+import os.path as op
 
 from video_tools.libs.jackolib import lsdir_af
-from shutil import copy
-from os.path import join
+
 
 # 设置输入输出文件夹
 SRC_DIR="src"
@@ -19,10 +20,11 @@ for file in lsdir_af(SRC_DIR, 'mp4'):
     new_file = f"240716-赖俊杰-BugZapper-00{i}.mp4"
 
     # 构造输入输出路径
-    src_file = join(SRC_DIR, file)
-    dst_file = join(DST_DIR, new_file)
+    src_file = op.join(SRC_DIR, file)
+    dst_file = op.join(DST_DIR, new_file)
     
     #复制
-    copy(src_file, dst_file)
+    shutil.copy(src_file, dst_file)
 
     i += 1
+    

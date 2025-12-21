@@ -1,9 +1,7 @@
-from os import listdir
-from os import walk
-from os.path import splitext
-from os.path import join
-from os.path import relpath
-from hashlib import new
+import hashlib
+import os
+import os.path as op
+
 
 def lsdir_af(path, file_extension):
     """
@@ -11,18 +9,18 @@ def lsdir_af(path, file_extension):
     指定文件后缀的文件列表
     """
     appointed_extension_files = []
-    files = listdir(path)
+    files = os.listdir(path)
 
     # tar.gz 文件
     if file_extension == 'tar.gz':
-        if splitext(file)[1][1:] == 'gz':
-            if splitext(splitext(file)[0])[1][1:] == 'tar':
+        if op.splitext(file)[1][1:] == 'gz':
+            if op.splitext(op.splitext(file)[0])[1][1:] == 'tar':
                 appointed_extension_files.append(file)
    
     # gz 文件
     elif file_extension == 'gz':
-        if splitext(file)[1][1:] == 'gz':
-            if splitext(splitext(file)[0])[1][1:] == 'tar':
+        if op.splitext(file)[1][1:] == 'gz':
+            if op.splitext(op.splitext(file)[0])[1][1:] == 'tar':
                 pass
             else:
                 appointed_extension_files.append(file)
@@ -30,7 +28,7 @@ def lsdir_af(path, file_extension):
     # 一般文件
     else:
         for file in files:
-            if splitext(file)[1][1:] == file_extension:
+            if op.splitext(file)[1][1:] == file_extension:
                 appointed_extension_files.append(file)
     
     return appointed_extension_files
@@ -43,10 +41,10 @@ def lsdirr(path):
     """
     file_paths = [] #存储文件路径的列表
     # 遍历目录
-    for root, dirs, files in walk(path):
+    for root, dirs, files in os.walk(path):
         for file in files:
             # 将文件的完整路径添加到列表中
-            file_paths.append(relpath(join(root, file), path))
+            file_paths.append(op.relpath(op.join(root, file), path))
     return file_paths
 
 
@@ -59,7 +57,7 @@ def lsdirr_af(path, file_extension):
     files = lsdirr(path)
 
     for file in files:
-        if splitext(file)[1][1:] == file_extension:
+        if op.splitext(file)[1][1:] == file_extension:
             appointed_extension_file_paths.append(file)
     
     return appointed_extension_file_paths
@@ -71,7 +69,7 @@ def calc_file_hash(file, algorithm='sha256'):
     哈希算法默认'sha256'
     """
     # 创建哈希对象
-    hash_obj = new(algorithm)
+    hash_obj = hashlib.new(algorithm)
 
     # 以二进制模式打开文件
     with open(file, 'rb') as f:
