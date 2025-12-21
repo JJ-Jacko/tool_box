@@ -1,7 +1,9 @@
 [project]
 name = "video_tools"
 version = "1.0"
-dependencies = []
+dependencies = [
+    "pillow"
+]
 
 [project.scripts]
 test-run = "video_tools.cli:main"
