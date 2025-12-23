@@ -1,21 +1,4 @@
 import hashlib
-import os
-import os.path as op
-
-
-def lsdirr_af(path, file_extension):
-    """
-    返回指定目录及子目录下
-    指定文件后缀的文件列表
-    """
-    appointed_extension_file_paths = []
-    files = lsdirr(path)
-
-    for file in files:
-        if op.splitext(file)[1][1:] == file_extension:
-            appointed_extension_file_paths.append(file)
-    
-    return appointed_extension_file_paths
 
 
 def calc_file_hash(file, algorithm='sha256'):
