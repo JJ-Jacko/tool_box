@@ -1,16 +1,19 @@
 from pathlib import Path
 from typing import Generator
+from typing import Tuple
 
 
-def iterdir_ext(
+def iter_dir_file(
         path: Path,
-        *exts: str
+        recurse: bool = False,
+        exts: Tuple[str | None] = ()
 ) -> Generator[Path, None, None]:
-    """遍历文件夹下的指定拓展名的所有文件
+    """遍历文件夹下的文件
 
     Args:
         path: 文件夹的路径
-        exts: 拓展名
+        recurse: 是否遍历所有子文件夹
+        exts: 拓展名 用于获取指定拓展名的文件
 
     Yields:
         file_path: 指定拓展名的文件的路径
@@ -18,63 +21,21 @@ def iterdir_ext(
     
     if not path.is_dir():
         raise ValueError("传入的路径必须为文件夹")
-
+    
     for sub_p in path.iterdir():
+        if sub_p.is_dir() and recurse:
+            yield from iter_dir_file(sub_p, recurse, exts)
+
         if not sub_p.is_file():
             continue
-        if not sub_p.suffix:
-            continue
-        if sub_p.suffix[1:] not in exts:
-            continue
+        
+        if exts:
+            # 文件无拓展名
+            if not sub_p.suffix:
+                continue
+            # 文件拓展名不符合条件
+            if sub_p.suffix[1:] not in exts:
+                continue
         
         yield sub_p
         
-
-def iterdir_recurse(path: Path) -> Generator[Path, None, None]:
-    """递归遍历文件夹下的所有文件的路径
-
-    Args:
-        path: 文件夹的路径
-
-    Yields:
-        file_path: 所有文件的路径
-    """
-    
-    if not path.is_dir():
-        raise ValueError("传入的路径必须为文件夹")
-    
-    for sub_p in path.iterdir():
-        if sub_p.is_file():
-            yield sub_p
-        elif sub_p.is_dir():
-            yield from iterdir_recurse(sub_p)
-
-
-def iterdir_recurse_ext(
-        path: Path,
-        *exts: str
-) -> Generator[Path, None, None]:
-    """递归遍历文件夹下的指定拓展名的文件的路径
-
-    Args:
-        path: 文件夹的路径
-
-    Yields:
-        file_path: 指定拓展名的文件的路径
-    """
-    
-    if not path.is_dir():
-        raise ValueError("传入的路径必须为文件夹")
-    
-    for sub_p in path.iterdir():
-        if sub_p.is_file():
-            if not sub_p.suffix:
-                continue
-            if sub_p.suffix[1:] not in exts:
-                continue
-            
-            yield sub_p
-            
-        elif sub_p.is_dir():
-            yield from iterdir_recurse_ext(sub_p, *exts)
-            
