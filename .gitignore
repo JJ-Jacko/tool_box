@@ -7,4 +7,6 @@ dist
 # .vscode
 
 # Project
+INPUT
+OUTPUT
 logs
