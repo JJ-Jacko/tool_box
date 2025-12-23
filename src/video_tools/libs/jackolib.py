@@ -3,37 +3,6 @@ import os
 import os.path as op
 
 
-def lsdir_af(path, file_extension):
-    """
-    返回指定目录下
-    指定文件后缀的文件列表
-    """
-    appointed_extension_files = []
-    files = os.listdir(path)
-
-    # tar.gz 文件
-    if file_extension == 'tar.gz':
-        if op.splitext(file)[1][1:] == 'gz':
-            if op.splitext(op.splitext(file)[0])[1][1:] == 'tar':
-                appointed_extension_files.append(file)
-   
-    # gz 文件
-    elif file_extension == 'gz':
-        if op.splitext(file)[1][1:] == 'gz':
-            if op.splitext(op.splitext(file)[0])[1][1:] == 'tar':
-                pass
-            else:
-                appointed_extension_files.append(file)
-
-    # 一般文件
-    else:
-        for file in files:
-            if op.splitext(file)[1][1:] == file_extension:
-                appointed_extension_files.append(file)
-    
-    return appointed_extension_files
-
-
 def lsdirr(path):
     """
     返回指定目录及子目录下
