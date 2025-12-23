@@ -13,7 +13,7 @@ def iterdir_ext(
         exts: 拓展名
 
     Yields:
-        file_path: 指定拓展名的文件
+        file_path: 指定拓展名的文件的路径
     """
     
     if not path.is_dir():
@@ -34,7 +34,7 @@ def iterdir_recurse(path: Path) -> Generator[Path, None, None]:
     """递归遍历文件夹下的所有文件的路径
 
     Args:
-        path (Path): 文件夹的路径
+        path: 文件夹的路径
 
     Yields:
         file_path: 所有文件的路径
