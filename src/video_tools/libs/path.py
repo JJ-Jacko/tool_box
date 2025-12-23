@@ -29,3 +29,23 @@ def iterdir_ext(
         
         yield sub_p
         
+
+def iterdir_recurse(path: Path) -> Generator[Path, None, None]:
+    """递归遍历文件夹下的所有文件的路径
+
+    Args:
+        path (Path): 文件夹的路径
+
+    Yields:
+        file_path: 所有文件的路径
+    """
+    
+    if not path.is_dir():
+        raise ValueError("传入的路径必须为文件夹")
+    
+    for sub_p in path.iterdir():
+        if sub_p.is_file():
+            yield sub_p
+        elif sub_p.is_dir():
+            yield from iterdir_recurse(sub_p)
+            

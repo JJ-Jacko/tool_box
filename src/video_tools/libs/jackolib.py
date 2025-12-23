@@ -3,20 +3,6 @@ import os
 import os.path as op
 
 
-def lsdirr(path):
-    """
-    返回指定目录及子目录下
-    文件列表
-    """
-    file_paths = [] #存储文件路径的列表
-    # 遍历目录
-    for root, dirs, files in os.walk(path):
-        for file in files:
-            # 将文件的完整路径添加到列表中
-            file_paths.append(op.relpath(op.join(root, file), path))
-    return file_paths
-
-
 def lsdirr_af(path, file_extension):
     """
     返回指定目录及子目录下
