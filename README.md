@@ -27,13 +27,6 @@ source .venv/bin/activate
 
 放入 OUTPUT 文件夹
 
-### 拆分 pdf
-遍历 INPUT 文件夹的 `pdf` 文件
-
-拆分成图片
-
-放入 OUTPUT 文件夹
-
 ### 凌乱文件重命名
 遍历 INPUT 文件夹指定格式的文件
 
