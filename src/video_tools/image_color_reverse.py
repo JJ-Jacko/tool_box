@@ -1,20 +1,16 @@
 """反色图片"""
-from pathlib import Path
 
 from PIL import Image
 
+from video_tools import context
 from video_tools.libs.log import get_logger
 from video_tools.libs.path import iter_dir_file
 
 
-INPUT_DIR = Path("INPUT")
-OUTPUT_DIR = Path("OUTPUT")
-IMAGE_EXTENSIONS = ("jpg", "png")
-
 logger = get_logger("image_color_reverse")
 
-for src_file in iter_dir_file(INPUT_DIR, exts=IMAGE_EXTENSIONS):
-    dst_file = OUTPUT_DIR / src_file.name
+for src_file in iter_dir_file(context.INPUT_DIR, exts=context.EXTENSION.IMAGE):
+    dst_file = context.OUTPUT_DIR / src_file.name
     
     image = Image.open(src_file)
     image = image.convert("RGB")
