@@ -2,8 +2,8 @@
 import shutil
 
 from video_tools import context
-from video_tools.libs.log import get_logger
-from video_tools.libs.path import iter_dir_file
+from video_tools.log import get_logger
+from video_tools.path import iter_dir_file
 
 
 def run():
