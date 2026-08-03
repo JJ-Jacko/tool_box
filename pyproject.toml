@@ -1,18 +1,18 @@
 [project]
-name = "video_tools"
+name = "tool_box"
 version = "1.0"
 dependencies = [
     "pillow"
 ]
 
 [project.scripts]
-run-compressed-files-extract     = "video_tools.cli.compressed_files_extract:run"
-run-files-duplicate              = "video_tools.cli.files_duplicate:run"
-run-files-rename                 = "video_tools.cli.files_rename:run"
-run-files-summary                = "video_tools.cli.files_summary:run"
-run-images-to-pdf                = "video_tools.cli.images_to_pdf:run"
-run-images-color-reverse         = "video_tools.cli.images_color_reverse:run"
-run-videos-encoding              = "video_tools.cli.videos_encoding:run"
+run-compressed-files-extract     = "tool_box.cli.compressed_files_extract:run"
+run-files-duplicate              = "tool_box.cli.files_duplicate:run"
+run-files-rename                 = "tool_box.cli.files_rename:run"
+run-files-summary                = "tool_box.cli.files_summary:run"
+run-images-to-pdf                = "tool_box.cli.images_to_pdf:run"
+run-images-color-reverse         = "tool_box.cli.images_color_reverse:run"
+run-videos-encoding              = "tool_box.cli.videos_encoding:run"
 
 [build-system]
 requires = ["hatchling"]

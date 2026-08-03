@@ -1,9 +1,9 @@
 """批量解压文件"""
 import subprocess
 
-from video_tools import context
-from video_tools.log import get_logger
-from video_tools.path import iter_dir_file
+from tool_box import context
+from tool_box.log import get_logger
+from tool_box.path import iter_dir_file
 
 
 def run():
