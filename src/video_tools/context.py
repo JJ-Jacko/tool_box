@@ -17,8 +17,8 @@ OUTPUT_DIR = Path("output")
 
 # Extensions
 class EXTENSION:
-    IMAGE = set("jpg", "png")
-    MEDIA = set("mp4", "mov", "flv", "avi")
+    IMAGE = {"jpg", "png"}
+    MEDIA = {"mp4", "mov", "flv", "avi"}
     
 # Initialization
 INPUT_DIR.mkdir(parents=True, exist_ok=True)
