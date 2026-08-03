@@ -6,7 +6,13 @@ dependencies = [
 ]
 
 [project.scripts]
-test-run = "video_tools.cli:main"
+run-compressed-files-extract     = "video_tools.cli.compressed_files_extract:run"
+run-files-duplicate              = "video_tools.cli.files_duplicate:run"
+run-files-rename                 = "video_tools.cli.files_rename:run"
+run-files-summary                = "video_tools.cli.files_summary:run"
+run-images-to-pdf                = "video_tools.cli.images_to_pdf:run"
+run-images-color-reverse         = "video_tools.cli.images_color_reverse:run"
+run-videos-encoding              = "video_tools.cli.videos_encoding:run"
 
 [build-system]
 requires = ["hatchling"]
