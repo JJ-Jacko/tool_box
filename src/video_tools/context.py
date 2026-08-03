@@ -17,6 +17,7 @@ OUTPUT_DIR = Path("output")
 
 # Extensions
 class EXTENSION:
+    COMPRESSED_FILE = frozenset(["tar", "gz", "xz", "7z", "zip", "rar"])
     IMAGE = frozenset(["jpg", "png"])
     MEDIA = frozenset(["mp4", "mov", "flv", "avi"])
     
