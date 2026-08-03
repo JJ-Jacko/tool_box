@@ -17,8 +17,8 @@ OUTPUT_DIR = Path("output")
 
 # Extensions
 class EXTENSION:
-    IMAGE = {"jpg", "png"}
-    MEDIA = {"mp4", "mov", "flv", "avi"}
+    IMAGE = frozenset(["jpg", "png"])
+    MEDIA = frozenset(["mp4", "mov", "flv", "avi"])
     
 # Initialization
 INPUT_DIR.mkdir(parents=True, exist_ok=True)
