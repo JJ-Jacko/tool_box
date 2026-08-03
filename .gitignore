@@ -5,7 +5,7 @@ dist
 uv.lock
 
 # VSCode
-# .vscode
+.vscode
 
 # Project
 INPUT
