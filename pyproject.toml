@@ -13,6 +13,7 @@ run-files-summary                = "tool_box.cli.files_summary:run"
 run-images-to-pdf                = "tool_box.cli.images_to_pdf:run"
 run-images-color-reverse         = "tool_box.cli.images_color_reverse:run"
 run-videos-encoding              = "tool_box.cli.videos_encoding:run"
+run-videos-to-gif                = "tool_box.cli.videos_to_gif:run"
 
 [build-system]
 requires = ["hatchling"]

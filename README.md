@@ -45,3 +45,8 @@ Encoding all videos in the `input` folder to the `output` folder.
 ```sh
 run-videos-encoding
 ```
+### 🖼️ Videos to GIF
+Transform all videos in the `input` folder to the GIF images in the `output` folder.
+```sh
+run-videos-to-gif
+```
