@@ -1,3 +1,4 @@
+import argparse
 import subprocess
 from typing import Any
 from typing import Dict
@@ -12,8 +13,21 @@ from tool_box.path import iter_dir_file
 
 def run():
     logger = get_logger("videos_to_gif")
-    fps = 10
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--fps",
+        help="Frame rate"
+    )
+    args = parser.parse_args()
 
+    if args.fps is None:
+        fps = 10
+    else:
+        try:
+            fps = int(args.fps)
+        except ValueError:
+            raise
+            
     for src_file in iter_dir_file(context.INPUT_DIR, exts=context.EXTENSION.MEDIA):
         palette_file = context.OUTPUT_DIR / f"{src_file.stem}.png"
         gif_file = context.OUTPUT_DIR / f"{src_file.stem}.gif"
