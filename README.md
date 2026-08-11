@@ -50,3 +50,7 @@ Transform all videos in the `input` folder to the GIF images in the `output` fol
 ```sh
 run-videos-to-gif
 ```
+Specify frame rate.
+```sh
+run-videos-to-gif --fps 8
+```
