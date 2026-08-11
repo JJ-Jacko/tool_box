@@ -2,7 +2,8 @@
 name = "tool_box"
 version = "1.0"
 dependencies = [
-    "pillow"
+    "pillow",
+    "typed-ffmpeg",
 ]
 
 [project.scripts]

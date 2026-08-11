@@ -1,5 +1,4 @@
-"""重新编码媒体"""
-import subprocess
+import ffmpeg
 
 from tool_box import context
 from tool_box.log import get_logger
@@ -11,13 +10,13 @@ def run():
 
     for src_file in iter_dir_file(context.INPUT_DIR, exts=context.EXTENSION.MEDIA):
         dst_file = context.OUTPUT_DIR / f"{src_file.stem}.mp4"
-        cmd = [
-            "ffmpeg",
-            "-hide_banner",
-            "-i", str(src_file),
-            "-c:v", "libx264",
-            str(dst_file)
-        ]
-        subprocess.run(cmd, check=True)
+
+        input_stream = ffmpeg.input(src_file)
+        output_stream = (
+            input_stream
+            .output(filename=dst_file, vcodec="libx264")
+        )
+
+        output_stream.run(overwrite_output=True, quiet=True)
         logger.info(f"finished: {str(src_file)}")
         
