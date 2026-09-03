@@ -1,17 +1,18 @@
-"""统计文件"""
-from typing import Dict
+"""summary all the file"""
 
-from tool_box import context
+from typing import Dict
+from pathlib import Path
+
 from tool_box.log import get_logger
 from tool_box.path import iter_dir_file
 
 
-def run():
-    logger = get_logger("file_sum")
+def run(path_input: Path):
+    logger = get_logger("file_sum", file=False)
     existed_type_map: Dict[str, int] = dict()
 
     # 检查
-    for src_file in iter_dir_file(context.INPUT_DIR, recurse=True):
+    for src_file in iter_dir_file(path_input, recurse=True):
         suffix = src_file.suffix[1:]
         
         if suffix in existed_type_map:

@@ -1,20 +1,24 @@
-"""提取指定格式的文件"""
+"""duplicate all the file of spcificed extension"""
+
 import shutil
+from pathlib import Path
 from typing import Dict
 
-from tool_box import context
 from tool_box.datas import File
 from tool_box.log import get_logger
 from tool_box.path import get_file_hash
 from tool_box.path import iter_dir_file
 
 
-def run():
-    logger = get_logger("file_duplicate")
+def run(
+        path_input: Path,
+        path_output: Path
+):
+    logger = get_logger("file_duplicate", file=False)
     existed_file_map: Dict[str, File] = dict()
 
     # 检查
-    for src_file in iter_dir_file(context.INPUT_DIR, recurse=True, exts=("jpg")):
+    for src_file in iter_dir_file(path_input, recurse=True, exts=("jpg")):
         hash = get_file_hash(src_file)
         
         if hash in existed_file_map:
@@ -26,7 +30,7 @@ def run():
 
     # 复制
     for padding_cp_file in existed_file_map.values():
-        dst_file = context.OUTPUT_DIR / padding_cp_file.path.name
+        dst_file = path_output / padding_cp_file.path.name
         shutil.copy2(padding_cp_file.path, dst_file)
         logger.info(f"finished: {str(padding_cp_file.path)}")
 
