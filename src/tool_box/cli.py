@@ -3,6 +3,7 @@
 import argparse
 from pathlib import Path
 from typing import Dict
+from typing import Set
 
 from tool_box import context
 from tool_box.log import get_logger
@@ -25,6 +26,11 @@ process_commands_map: Dict[str, function] = {
     "images_to_pdf": images_to_pdf.run,
     "videos_encoding": videos_encoding.run,
     "videos_to_gif": videos_to_gif.run,
+}
+
+process_commands_with_extension: Set[str] = {
+    "files_duplicate",
+    "files_rename",
 }
 
 
@@ -61,7 +67,7 @@ def main():
     parser_9 = subparsers.add_parser("generate", help="generate something to screen")
     process_add_arguments(parser_1)
     process_add_arguments(parser_2, with_extension=True)
-    process_add_arguments(parser_3)
+    process_add_arguments(parser_3, with_extension=True)
     process_add_arguments(parser_4)
     process_add_arguments(parser_5)
     process_add_arguments(parser_6)
@@ -93,7 +99,7 @@ def main():
             "path_output": path_output,
         }
 
-        if args.command == "files_duplicate":
+        if args.command in process_commands_with_extension:
             command_args["extensions"] = set(args.extensions)
 
         process_commands_map[args.command](**command_args)
