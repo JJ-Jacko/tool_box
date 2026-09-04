@@ -3,7 +3,12 @@ name = "tool_box"
 version = "1.0"
 dependencies = [
     "pillow",
-    "typed-ffmpeg",
+    "typed-ffmpeg"
+]
+
+[project.optional-dependencies]
+dev = [
+    "debugpy"
 ]
 
 [project.scripts]
