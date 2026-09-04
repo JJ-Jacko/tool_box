@@ -28,9 +28,21 @@ process_commands_map: Dict[str, function] = {
 }
 
 
-def process_add_arguments(parser: argparse.ArgumentParser):
+def process_add_arguments(
+        parser: argparse.ArgumentParser,
+        with_extension: bool = False
+):
     parser.add_argument("input", help="input directory")
     parser.add_argument("-o", "--output", help="output directory")
+
+    if with_extension:
+        parser.add_argument(
+            "-ext", "--extension",
+            dest="extensions",
+            nargs="+",
+            required=True,
+            help="file extensions (e.g. jpg, txt, mp4)"
+        )
 
 
 def main():    
@@ -48,7 +60,7 @@ def main():
     parser_8 = subparsers.add_parser("videos_to_gif", help=videos_to_gif.__doc__)
     parser_9 = subparsers.add_parser("generate", help="generate something to screen")
     process_add_arguments(parser_1)
-    process_add_arguments(parser_2)
+    process_add_arguments(parser_2, with_extension=True)
     process_add_arguments(parser_3)
     process_add_arguments(parser_4)
     process_add_arguments(parser_5)
@@ -71,10 +83,16 @@ def main():
         else:
             path_output = context.OUTPUT_DIR
 
-        process_commands_map[args.command](
-            path_input=path_input,
-            path_output=path_output
-        )
+        command_args = {
+            "path_input": path_input,
+            "path_output": path_output,
+        }
+
+        if args.command == "files_duplicate":
+            command_args["extensions"] = set(args.extensions)
+
+        process_commands_map[args.command](**command_args)
+
     elif args.command == "generate":
         compressed_files_extract.run(path_input, path_output)
     else:

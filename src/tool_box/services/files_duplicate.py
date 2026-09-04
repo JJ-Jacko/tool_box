@@ -3,6 +3,7 @@
 import shutil
 from pathlib import Path
 from typing import Dict
+from typing import Set
 
 from tool_box.datas import File
 from tool_box.log import get_logger
@@ -12,13 +13,15 @@ from tool_box.path import iter_dir_file
 
 def run(
         path_input: Path,
-        path_output: Path
+        path_output: Path,
+        extensions: Set[str]
 ):
     logger = get_logger("file_duplicate", file=False)
     existed_file_map: Dict[str, File] = dict()
 
     # 检查
-    for src_file in iter_dir_file(path_input, recurse=True, exts=("jpg")):
+    src_dir = list(iter_dir_file(path_input, recurse=True, exts=extensions))
+    for src_file in src_dir:
         hash = get_file_hash(src_file)
         
         if hash in existed_file_map:
