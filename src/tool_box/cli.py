@@ -32,8 +32,8 @@ def process_add_arguments(
         parser: argparse.ArgumentParser,
         with_extension: bool = False
 ):
-    parser.add_argument("input", help="input directory")
-    parser.add_argument("-o", "--output", help="output directory")
+    parser.add_argument("-i", "--input", required=True, help="input directory")
+    parser.add_argument("-o", "--output", required=False, help="output directory")
 
     if with_extension:
         parser.add_argument(
@@ -78,10 +78,15 @@ def main():
         # Check output directory
         if args.output:
             path_output = Path(args.output)
-            if not path_output.is_dir():
-                parser.error(f"{path_output} is not directory")
+            if path_output.exists():
+                if not path_output.is_dir():
+                    parser.error(f"{path_output} is not directory")
+            else:
+                path_output = context.OUTPUT_DIR
+                path_output.mkdir(parents=True, exist_ok=True)
         else:
             path_output = context.OUTPUT_DIR
+            path_output.mkdir(parents=True, exist_ok=True)
 
         command_args = {
             "path_input": path_input,

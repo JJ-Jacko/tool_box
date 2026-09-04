@@ -20,7 +20,3 @@ class EXTENSION:
     COMPRESSED_FILE = frozenset(["tar", "gz", "xz", "7z", "zip", "rar"])
     IMAGE = frozenset(["jpg", "png"])
     MEDIA = frozenset(["mp4", "mov", "flv", "avi"])
-    
-# Initialization
-INPUT_DIR.mkdir(parents=True, exist_ok=True)
-OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
