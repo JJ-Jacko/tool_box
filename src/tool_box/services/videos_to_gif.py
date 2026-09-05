@@ -29,26 +29,18 @@ def run(
         streams: List[Dict[str, Any]] = info["streams"]
         for s in streams:
             if s["codec_type"] == "video":
-                width = s.get("width", None)
-                height = s.get("height", None)
+                width = s.get("width")
+                height = s.get("height")
                 break
         else:
-            width = None
-            height = None
-
-        # Check width & height
-        if width is None or height is None:
-            raise RuntimeError
-        if width != height:
-            raise RuntimeError
-        else:
-            scale: int = width
+            logger.warning(f"{src_file} don't have any video stream")
+            continue
 
         cmd_gen_palette = [
             "ffmpeg",
             "-hide_banner",
             "-i", str(src_file),
-            "-vf", f"fps={fps},scale={scale}:{scale}:flags=lanczos,palettegen",
+            "-vf", f"fps={fps},scale={width}:{height}:flags=lanczos,palettegen",
             str(palette_file)
         ]
         cmd_gen_gif = [
@@ -56,7 +48,7 @@ def run(
             "-hide_banner",
             "-i", str(src_file),
             "-i", str(palette_file),
-            "-filter_complex", f"fps={fps},scale={scale}:{scale}:flags=lanczos[x];[x][1:v]paletteuse",
+            "-filter_complex", f"fps={fps},scale={width}:{height}:flags=lanczos[x];[x][1:v]paletteuse",
             "-loop", "0",
             str(gif_file)
         ]
