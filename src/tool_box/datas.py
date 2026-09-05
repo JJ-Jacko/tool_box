@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from pathlib import Path
 
 
@@ -26,4 +27,12 @@ class File:
     
     def increase_times(self):
         self.times += 1
-        
+
+
+@dataclass
+class Command:
+    func: function
+    help: str
+    with_input: bool
+    with_output: bool
+    with_extension: bool
