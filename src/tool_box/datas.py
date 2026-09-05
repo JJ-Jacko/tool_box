@@ -36,3 +36,5 @@ class Command:
     with_input: bool
     with_output: bool
     with_extension: bool
+
+    with_fps: bool = False

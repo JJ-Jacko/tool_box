@@ -1,6 +1,5 @@
 """transform all videos to the GIF images"""
 
-import argparse
 import subprocess
 from pathlib import Path
 from typing import Any
@@ -16,23 +15,10 @@ from tool_box.path import iter_dir_file
 
 def run(
         path_input: Path,
-        path_output: Path
+        path_output: Path,
+        fps: int = 10
 ):
     logger = get_logger("videos_to_gif", file=False)
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--fps",
-        help="Frame rate"
-    )
-    args = parser.parse_args()
-
-    if args.fps is None:
-        fps = 10
-    else:
-        try:
-            fps = int(args.fps)
-        except ValueError:
-            raise
             
     for src_file in iter_dir_file(path_input, exts=context.EXTENSION.MEDIA):
         palette_file = path_output / f"{src_file.stem}.png"

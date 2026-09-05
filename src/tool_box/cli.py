@@ -74,7 +74,8 @@ process_commands_map: Dict[str, Command] = {
         help=videos_to_gif.__doc__,
         with_input=True,
         with_output=True,
-        with_extension=False
+        with_extension=False,
+        with_fps=True
     ),
     "generate": Command(
         func=None,
@@ -103,6 +104,15 @@ def register_commands(subparsers: argparse._SubParsersAction):
                 nargs="+",
                 required=True,
                 help="file extensions (e.g. jpg, txt, mp4)"
+            )
+
+        if cmd.with_fps:
+            parser.add_argument(
+                "-fps", "--frame-rate",
+                dest="fps",
+                type=int,
+                required=False,
+                help="frame rate of target GIF image"
             )
 
 
@@ -140,6 +150,10 @@ def get_command_args(
 
     if cmd.with_extension:
         command_args["extensions"] = set(main_parser_args.extensions)
+
+    if cmd.with_fps:
+        if fps := main_parser_args.fps:
+            command_args["fps"] = fps
 
     return command_args
 
