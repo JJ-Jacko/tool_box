@@ -1,6 +1,6 @@
 [project]
 name = "tool_box"
-version = "1.0"
+version = "2.0"
 dependencies = [
     "pillow",
     "typed-ffmpeg"
