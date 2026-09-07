@@ -38,3 +38,4 @@ class Command:
     with_extension: bool
 
     with_fps: bool = False
+    with_length: bool = False

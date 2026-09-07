@@ -4,7 +4,6 @@ import argparse
 from pathlib import Path
 from typing import Any
 from typing import Dict
-from typing import Set
 
 from tool_box import context
 from tool_box.datas import Command
@@ -13,6 +12,7 @@ from tool_box.services import compressed_files_extract
 from tool_box.services import files_duplicate
 from tool_box.services import files_rename
 from tool_box.services import files_summary
+from tool_box.services import gen_pwd
 from tool_box.services import images_color_reverse
 from tool_box.services import images_to_pdf
 from tool_box.services import videos_encoding
@@ -77,12 +77,13 @@ process_commands_map: Dict[str, Command] = {
         with_extension=False,
         with_fps=True
     ),
-    "generate": Command(
-        func=None,
-        help="generate something to screen",
+    "gen_pwd": Command(
+        func=gen_pwd.run,
+        help=gen_pwd.__doc__,
         with_input=False,
         with_output=False,
-        with_extension=False
+        with_extension=False,
+        with_length=True
     )
 }
 
@@ -113,6 +114,15 @@ def register_commands(subparsers: argparse._SubParsersAction):
                 type=int,
                 required=False,
                 help="frame rate of target GIF image"
+            )
+
+        if cmd.with_length:
+            parser.add_argument(
+                "-len", "--length",
+                dest="length",
+                type=int,
+                required=True,
+                help="length of generation"
             )
 
 
@@ -154,6 +164,9 @@ def get_command_args(
     if cmd.with_fps:
         if fps := main_parser_args.fps:
             command_args["fps"] = fps
+
+    if cmd.with_length:
+        command_args["length"] = main_parser_args.length
 
     return command_args
 
