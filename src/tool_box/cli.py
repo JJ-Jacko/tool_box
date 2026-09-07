@@ -174,7 +174,7 @@ def get_command_args(
 def main():
     logger = get_logger("tool-box", file=False)
 
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = argparse.ArgumentParser(prog="tool-box", description=__doc__)
     subparsers = parser.add_subparsers(dest="command")
     register_commands(subparsers)
     args = parser.parse_args()
