@@ -31,4 +31,4 @@ def run(length: int):
 
     random.shuffle(chars)
 
-    return ''.join(chars)
+    print(''.join(chars))
