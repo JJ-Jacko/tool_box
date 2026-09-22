@@ -21,13 +21,14 @@ def run(length: int):
         random.choice(string.punctuation),
     ]
     chars_all = [
-        string.ascii_lowercase,
-        string.ascii_uppercase,
-        string.digits,
-        string.punctuation
+        *string.ascii_lowercase,
+        *string.ascii_uppercase,
+        *string.digits,
+        *string.punctuation
     ]
+
     chars.extend(chars_required)
-    chars.extend(random.choices(chars_required, k=length - len(chars_all)))
+    chars.extend(random.choices(chars_all, k=length - 4))
 
     random.shuffle(chars)
 
