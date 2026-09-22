@@ -63,3 +63,7 @@ Specify frame rate.
 ```sh
 tool-box videos_to_gif -fps 8
 ```
+### 🔑 Generate password
+```sh
+tool-box gen_pwd -len 10
+```
